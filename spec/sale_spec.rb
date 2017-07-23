@@ -16,6 +16,8 @@ describe(Sale)do
       expect(brand2.stores).to(eq([store2]))
       expect(sale1.brand).to(eq(brand1))
       expect(brand1.sales).to(eq([sale1,sale2]))
+      Sale.where(store_id: store1.id).destroy_all
+      expect(Sale.all).to(eq([sale2,sale3]))
     end
   end
 end
