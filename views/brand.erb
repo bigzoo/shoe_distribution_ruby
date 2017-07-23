@@ -1,0 +1,164 @@
+<div class="blue">
+  <div class="container">
+    <%if @brand.sales.any?() %>
+    <ul class="center collection with-header ">
+      <li class="collection-header blue white-text">
+        <h4>Availability of
+          <%= @brand.name %></h4>
+      </li>
+      <% @brand.sales.each() do |sale| store = Store.find(sale.store_id)
+     brand = Brand.find(sale.brand_id)%>
+      <li class="collection-item">
+        <div>Store:
+          <a href="/stores/<%= store.id%>"><%= store.name%></a>
+          Price:
+          <%= sale.price%>
+          Stock:
+          <%= sale.stock%>
+          <a href="#modal5" class="secondary-content">
+            <i class="material-icons red-text">delete</i>
+          </a>
+          <a href="#modal6" class="secondary-content">
+            <i class="material-icons blue-text">edit</i>
+          </a>
+          <div class="secondary-content">
+            <%=  %>
+          </div>
+          <!-- Delete A Sale For This Brand -->
+          <div id="modal5" class="modal">
+            <div class="modal-content">
+              <h4>You Are About To Remove this Brand from the selected Store..</h4>
+              <p>Changes made are irrevirsible.</p>
+            </div>
+            <div class="modal-footer">
+              <a href="/brands/<%= @brand.id %>/delete/sales/<%= sale.id %>" class="modal-action modal-close waves-effect waves-green btn-flat red">I'll Proceed</a>
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">No Thanks!</a>
+            </div>
+          </div>
+          <!-- Edit Sale Modal -->
+          <div id="modal6" class="modal">
+            <div class="modal-content blue-text">
+              <h4 class="center">Edit This Sale</h4>
+              <form action="/sales" method="post">
+                <input type="hidden" name="_method" value="patch">
+                <div class="input-field">
+                  <input type="hidden" name="sale_id" value="<%=sale.id%>">
+                </div>
+                <div class="input-field">
+                  <select disabled name="brand_id" id="brand_id">
+                    <option value="<%= sale.brand.id %>"><%= sale.brand.name %></option>
+                  </select>
+                  <label>Brand Cannot be Changed</label>
+                </div>
+                <div>
+                  <div class="input-field">
+                    <input placeholder="<%= sale.price %>" name="price" id="price" type="number" class="validate">
+                    <label for="price">New Cost</label>
+                  </div>
+                </div>
+                <div>
+                  <div class="input-field">
+                    <input placeholder="<%= sale.stock %>" name="stock" id="stock" type="number" class="validate">
+                    <label for="stock">New Stock</label>
+                  </div>
+                </div>
+                <button type="submit" class="blue modal-action modal-close waves-effect waves-blue btn-flat">Update Sale<i class="material-icons right">send</i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </li>
+      <%end %>
+    </ul>
+  <% else %>
+    <ul class="center collection with-header">
+      <li class="collection-header">
+        <h4>Please add this Brand to some
+          <a href="/stores">stores</a>!</h4>
+      </li>
+    </ul>
+    <% end %>
+  </div>
+</div>
+
+<div class="fixed-action-btn vertical click-to-toggle">
+  <a class="btn-floating btn-large">
+    <i class="material-icons blue">menu</i>
+  </a>
+  <ul>
+    <li>
+      <a href="#modal2" class="btn-floating">
+        <i class="material-icons white blue-text">edit</i>
+      </a>
+    </li>
+    <li>
+      <a href="#modal3" class="btn-floating">
+        <i class="material-icons white-text yellow darken-1">delete</i>
+      </a>
+    </li>
+    <li>
+      <a href="#modal4" class="btn-floating">
+        <i class="material-icons white-text red darken-1">delete</i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- Edit Brand -->
+<div id="modal2" class="modal">
+  <div class="modal-content blue-text">
+    <h4 class="center">Edit Brand</h4>
+    <form action="/brands/<%=@brand.id%>" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <div>
+        <div class="input-field">
+          <input placeholder="<%=@brand.name%>" name="name" id="name" type="text" class="validate">
+          <label for="name">New Name</label>
+        </div>
+      </div>
+      <div>
+        <div class="input-field">
+          <input placeholder="<%=@brand.manufacturer%>" name="manufacturer" id="manufacturer" type="text" class="validate">
+          <label for="manufacturer">New Manufacturer</label>
+        </div>
+      </div>
+      <div>
+        <div class="input-field">
+          <input placeholder="<%=@brand.release_date%>" name="release_date" id="release_date" type="text" class="datepicker">
+          <label for="release_date">New Date</label>
+        </div>
+      </div>
+      <div>
+        <div class="input-field">
+          <input placeholder="<%=@brand.image_url%>" name="image_url" id="image_url" type="text" class="validate">
+          <label for="image_url">New URL</label>
+        </div>
+      </div>
+      <button type="submit" class="blue modal-action modal-close waves-effect waves-blue btn-flat">Update Brand<i class="material-icons right">send</i>
+      </button>
+    </form>
+  </div>
+</div>
+<!-- Delete All Sales For This Brand -->
+<div id="modal3" class="modal">
+  <div class="modal-content">
+    <h4>You Are About To Delete All Store Associations for this Brand.</h4>
+    <p>If you proceed, this brand will not be in any stores.</p>
+  </div>
+  <div class="modal-footer">
+    <a href="/brands/<%= @brand.id %>/delete/sales" class="modal-action modal-close waves-effect waves-green btn-flat red">I'll Proceed</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">No Thanks!</a>
+  </div>
+</div>
+<!-- Delete All Sales For This Brand -->
+<div id="modal4" class="modal">
+  <div class="modal-content">
+    <h4>You Are About To Delete This Brand.</h4>
+    <p>If you proceed, both the brand and any links to stores will be lost.</p>
+  </div>
+  <div class="modal-footer">
+    <a href="/brands/delete/<%= @brand.id %>" class="modal-action modal-close waves-effect waves-green btn-flat red">I'll Proceed</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">No Thanks!</a>
+  </div>
+</div>
