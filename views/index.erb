@@ -1,60 +1,79 @@
 <!--Hero-->
 <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-        <h1 class="text_h center header cd-headline letters type">
-            <span>Track all</span>
-            <span class="cd-words-wrapper waiting">
-                <b class="is-visible">shoe brands.</b>
-                <b>stores in town.</b>
-                <b>shoes in sale.</b>
-            </span>
-        </h1>
-    </div>
+  <div class="container">
+    <h1 class="text_h center header cd-headline letters type">
+      <span>Track all</span>
+      <span class="cd-words-wrapper waiting">
+        <b class="is-visible">shoe brands.</b>
+        <b>stores in town.</b>
+        <b>shoes in sale.</b>
+      </span>
+    </h1>
+  </div>
 </div>
 <!--Parallax-->
 <div class="parallax-container">
-    <div class="parallax"><img src="https://s-media-cache-ak0.pinimg.com/736x/6b/d7/a8/6bd7a84789ef141fe57737a347debcfe.jpg"></div>
+  <div class="parallax"><img src="https://s-media-cache-ak0.pinimg.com/736x/6b/d7/a8/6bd7a84789ef141fe57737a347debcfe.jpg"></div>
 </div>
 
 <!--Intro and service-->
 <div id="intro" class="section scrollspy">
-    <div class="container">
-        <div class="row">
-            <div  class="col s12">
-                <h2 class="center header text_h2">Use Shoepify to track all your Stores and Manage All Brands Within Your Stores!</h2>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <h2 class="center header text_h2">Use Shoepify to track all your Stores and Manage All Brands Within Your Stores!</h2>
+      </div>
     </div>
+  </div>
 </div>
 
 <!--stores-->
 <div class="section scrollspy" id="stores">
-    <div class="container">
-        <h2 class="header center text_b">Stores... </h2>
-        <a href="#modal1" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">add</i></a>
-        <div class="row">
-          <% @stores.each do |store| %>
-            <div class="col s12 m4 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="<%=store.image_url%>">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4"><%= store.name %> <i class="mdi-navigation-more-vert right"></i></span>
-                        <p><a href="/stores/<%= store.id %>">Visit Store</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4"><%= store.name %> <i class="mdi-navigation-close right"></i></span>
-                        <p><%= store.name %> is owned by <%= store.owner %> and is located at <%= store.location %>.</p>
-                    </div>
-                </div>
-            </div>
-          <% end %>
+  <div class="container">
+    <a href="/stores">
+      <h2 class="header center text_b">Stores...
+      </h2>
+    </a>
+    <a href="#modal1" class="btn-floating btn-large waves-effect waves-light blue">
+      <i class="material-icons">add</i>
+    </a>
+    <% if @stores.any? %>
+    <div class="row">
+      <% @stores.each do |store| %>
+      <div class="col s12 m4 l4">
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="<%=store.image_url%>">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4"><%= store.name %>
+              <i class="mdi-navigation-more-vert right"></i>
+            </span>
+            <p>
+              <a href="/stores/<%= store.id %>">Visit Store</a>
+            </p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4"><%= store.name %>
+              <i class="mdi-navigation-close right"></i>
+            </span>
+            <p><%= store.name %>
+              is owned by
+              <%= store.owner %>
+              and is located at
+              <%= store.location %>.</p>
+          </div>
         </div>
+      </div>
+      <% end %>
     </div>
+  <% else %>
+    <h4 class="header center text_b">It's lonely here... Click the plus to add some stores</h4>
+    <% end %>
+  </div>
 </div>
 
-  <!-- New Store Modal -->
+<!-- New Store Modal -->
 <div id="modal1" class="modal">
   <div class="modal-content blue-text">
     <h4 class="center">New Store</h4>
@@ -83,40 +102,61 @@
           <label for="image_url">Image URL</label>
         </div>
       </div>
-      <button type="submit" class="blue modal-action modal-close waves-effect waves-blue btn-flat">Add Store<i class="material-icons right">send</i></button>
+      <button type="submit" class="blue modal-action modal-close waves-effect waves-blue btn-flat">Add Store<i class="material-icons right">send</i>
+      </button>
     </form>
   </div>
 </div>
 <!--Parallax-->
 <div class="parallax-container">
-    <div class="parallax"><img src="https://www.cluburban.com/media/catalog/product/d/c/dcs-301815-glu-2.jpg"></div>
+  <div class="parallax"><img src="https://www.cluburban.com/media/catalog/product/d/c/dcs-301815-glu-2.jpg"></div>
 </div>
 <!--BRANDS-->
 <div class="section scrollspy" id="brands">
-    <div class="container">
-        <h2 class="header center text_b">Brands... </h2>
-        <a href="#modal2" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">add</i></a>
-        <div class="row">
-            <div class="col s12 m4 l4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="https://joashpereira.com/templates/material_one_pager/img/project1.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Brand Name <i class="mdi-navigation-more-vert right"></i></span>
-                        <p><a href="#">Brand link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Brand Name <i class="mdi-navigation-close right"></i></span>
-                        <p>Here is some more information about this project that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <a href="/brands">
+      <h2 class="header center text_b">Brands...
+      </h2>
+    </a>
+    <a href="#modal2" class="btn-floating btn-large waves-effect waves-light blue">
+      <i class="material-icons">add</i>
+    </a>
+    <% if @brands.any? %>
+    <div class="row">
+      <% @brands.each do |brand| %>
+      <div class="col s12 m4 l4">
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="<%= brand.image_url %>">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4"><%= brand.name%>
+              <i class="mdi-navigation-more-vert right"></i>
+            </span>
+            <p>
+              <a href="/brands/<%= brand.id %>">Visit Brand</a>
+            </p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4"><%= brand.name %>
+              <i class="mdi-navigation-close right"></i>
+            </span>
+            <p>This brand was manufactured by
+              <%= brand.manufacturer %>
+              and released on
+              <%= brand.release_date %>.</p>
+          </div>
         </div>
+      </div>
+      <% end %>
     </div>
+  <% else %>
+    <h4 class="header center text_b">It's lonely here... Click the plus to add some brands</h4>
+    <% end %>
+  </div>
 </div>
 
-  <!-- New Brand Modal -->
+<!-- New Brand Modal -->
 <div id="modal2" class="modal">
   <div class="modal-content blue-text">
     <h4 class="center">New Shoe Brand</h4>
@@ -135,11 +175,18 @@
       </div>
       <div>
         <div class="input-field">
+          <input name="release_date" id="release_date" type="text" class="datepicker">
+          <label for="release_date">Release Date</label>
+        </div>
+      </div>
+      <div>
+        <div class="input-field">
           <input name="image_url" id="image_url" type="text" class="validate">
           <label for="image_url">Image URL</label>
         </div>
       </div>
-      <button type="submit" class="blue modal-action modal-close waves-effect waves-blue btn-flat">Add Brand<i class="material-icons right">send</i></button>
+      <button type="submit" class="blue modal-action modal-close waves-effect waves-blue btn-flat">Add Brand<i class="material-icons right">send</i>
+      </button>
     </form>
   </div>
 </div>
