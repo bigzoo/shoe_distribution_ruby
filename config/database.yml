@@ -1,6 +1,7 @@
 development:
   adapter: postgresql
   database: shoes_dev
+  host: localhost
 test:
   adapter: postgresql
   database: shoes_test
