@@ -23,3 +23,15 @@ function scaleCard(e){var el=closest(e);var target=el,id=target.getAttribute('da
 function onAnimated(card,popup){card.addEventListener(transEndEventName,function transitionEnded(){card.style['opacity']=0;popup.style['visibility']='visible';popup.style['zIndex']=9999;card.removeEventListener(transEndEventName,transitionEnded);});}
 function onPopupClick(card,popup){popup.addEventListener('click',function toggleVisibility(e){var size=getDifference(popup,card);card.style['opacity']=1;card.style['borderRadius']='6px';hidePopup(e);transformCard(card,size);},false);}
 function hidePopup(e){e.target.style['visibility']='hidden';e.target.style['zIndex']=2;}});})(jQuery);$(document).ready(function(){$('.modal').modal();});
+$('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    closeOnSelect: false // Close upon selecting a date,
+  });
+
+  $(document).ready(function() {
+      $('select').material_select();
+    });
