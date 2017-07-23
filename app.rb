@@ -71,7 +71,7 @@ post('/stores')do
   store_image = params.fetch('image_url')
   new_store = Store.new(name:store_name,location:store_location,owner:store_owner,image_url:store_image)
   new_store.save
-  redirect('/stores/'.concat(new_store.id).to_s)
+  redirect('/stores')
 end
 
 patch('/stores/:id')do
