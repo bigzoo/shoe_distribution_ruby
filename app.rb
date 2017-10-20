@@ -2,16 +2,18 @@ require('bundler/setup')
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 also_reload('lib/**/*.rb')
-
+enable :sessions
 get('/')do
   @brands = Brand.all
   @stores = Store.all
   @sales = Sale.all
+  session[:id] = 'mimi'
   erb(:index)
 end
 
 get('/stores')do
   @stores = Store.all
+  puts session[:id]
   erb(:stores)
 end
 
